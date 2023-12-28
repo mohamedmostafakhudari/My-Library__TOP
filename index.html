@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style type="text/tailwindcss">
+			@property --btnBgColor1 {
+				syntax: "<color>";
+				initial-value: rgb(51 65 85);
+				inherits: false;
+			}
+			@property --btnBgColor2 {
+				syntax: "<color>";
+				initial-value: rgb(0 0 0);
+				inherits: false;
+			}
+			@layer base {
+				html {
+					box-sizing: border-box;
+				}
+				*,
+				*::before,
+				*::after {
+					box-sizing: inherit;
+				}
+				body {
+					line-height: 1.5;
+					min-height: 100vh;
+					position: relative;
+					scroll-behavior: smooth;
+				}
+				/* Hide scrollbar for Chrome, Safari and Opera */
+				body::-webkit-scrollbar {
+					display: none;
+				}
+
+				/* Hide scrollbar for IE, Edge and Firefox */
+				body {
+					-ms-overflow-style: none; /* IE and Edge */
+					scrollbar-width: none; /* Firefox */
+				}
+			}
+			@layer utilities {
+				.movingBackground {
+					animation: movingBackground;
+				}
+				@keyframes movingBackground {
+					0% {
+						background-position: 0% 400%;
+					}
+					100% {
+						background-position: 0% 0%;
+					}
+				}
+				.cardCoverUp {
+					animation: cardCoverUp;
+				}
+				@keyframes cardCoverUp {
+					0% {
+						transform: translateY(0);
+					}
+					100% {
+						transform: translateY(-100%);
+					}
+				}
+				.cardCoverDown {
+					animation: cardCoverDown;
+				}
+				@keyframes cardCoverDown {
+					0% {
+						transform: translateY(0);
+					}
+					100% {
+						transform: translateY(100%);
+					}
+				}
+			}
+			input[type="checkbox"] ~ [data-label="mark"] > svg {
+				transition: stroke-dashoffset 0.2s ease-in-out 50ms;
+				opacity: 0;
+			}
+			.checkmarkBackground {
+				background-image: radial-gradient(hsl(216, 74%, 77%), hsl(216, 71%, 44%));
+			}
+			input[type="checkbox"]:checked ~ [data-label="mark"] > svg {
+				stroke-dashoffset: 0;
+				transition: stroke-dashoffset 0.2s ease-in-out 200ms;
+				opacity: 100;
+			}
+
+			.btnBackground {
+				background-image: linear-gradient(var(--btnBgColor1), var(--btnBgColor2));
+				transition: --btnBgColor1 0.5s, --btnBgColor2 0.5s, transform 0.2s ease-in-out;
+			}
+			.btnBackground:hover {
+				--btnBgColor1: rgb(0 0 0);
+				--btnBgColor2: rgb(51 65 85);
+			}
+		</style>
+
+		<title>Library</title>
+	</head>
+	<body>
+		<div class="absolute inset-0 -z-10 bg-[image:url(./images/beanstalk-dark.webp)]"></div>
+		<div class="container mx-auto px-6 md:px-0">
+			<h1 class="text-center md:text-left text-6xl md:text-8xl text-white font-bold py-24 pb-64">My Library</h1>
+			<dialog class="relative p-16 py-24 backdrop:bg-black/50 space-y-12 rounded">
+				<button
+					class="absolute right-6 top-6 p-2"
+					data-action="closeDialog"
+				>
+					<div class="w-12">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+						>
+							<path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+						</svg>
+					</div>
+				</button>
+				<p class="text-2xl font-bold text-center">Add the details of the new book</p>
+				<form
+					method="dialog"
+					class="flex flex-col gap-6 items-start"
+				>
+					<div class="grid grid-cols-[160px_1fr] items-center">
+						<input
+							type="text"
+							id="title"
+							name="title"
+							class="border-2 border-slate-400 px-2 py-0.5 peer"
+							required
+							autocomplete="off"
+							autofocus
+						/>
+						<label
+							for="title"
+							class="order-[-1] peer-focus:font-bold"
+							>Title</label
+						>
+					</div>
+					<div class="grid grid-cols-[160px_1fr] items-center">
+						<input
+							type="text"
+							id="author"
+							name="author"
+							class="border-2 border-slate-400 px-2 py-0.5 peer"
+							required
+							autocomplete="off"
+						/>
+						<label
+							for="author"
+							class="order-[-1] peer-focus:font-bold"
+							>Author</label
+						>
+					</div>
+					<div class="grid grid-cols-[160px_1fr] items-center">
+						<input
+							type="number"
+							id="pages"
+							name="pages"
+							class="border-2 border-slate-400 px-2 py-0.5 peer"
+							required
+							autocomplete="off"
+						/>
+						<label
+							for="pages"
+							class="order-[-1] peer-focus:font-bold"
+							>Number Of Pages</label
+						>
+					</div>
+					<div class="grid grid-cols-[160px_1fr] items-center">
+						<label
+							for="read"
+							class=""
+							>Read it?</label
+						>
+						<div class="w-6 relative aspect-square border-2 justify-self-start border-slate-400 p-4">
+							<input
+								type="checkbox"
+								id="read"
+								name="read"
+								class="appearance-none inset-0 absolute z-10 cursor-pointer peer"
+							/>
+							<div class="absolute inset-0 scale-0 duration-200 ease-in-out checkmarkBackground peer-checked:scale-100"></div>
+							<div
+								class="absolute inset-1"
+								data-label="mark"
+							>
+								<svg
+									viewBox="0 0 103 103"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									stroke-dasharray="150"
+									stroke-dashoffset="150"
+									class=""
+								>
+									<path
+										d="M5.69186 73.6062L22 92L59.8459 46.8031L97.6919 1.60623"
+										stroke="hsl(40, 80%, 70%)"
+										stroke-width="12"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+					<button
+						data-action="addNewBook"
+						class="duration-200 ease-in-out btnBackground scale-95 hover:scale-100 text-white font-bold px-12 py-4 rounded mt-10 text-lg"
+					>
+						Add
+					</button>
+				</form>
+			</dialog>
+			<div
+				id="books"
+				class="grid grid-cols-1 justify-items-center md:justify-items-stretch md:grid-cols-[repeat(auto-fill,minmax(min(300px,100%),1fr))] gap-12 gap-y-[13rem]"
+			>
+				<!-- books will be added here -->
+				<button
+					id="openDialogBtn"
+					data-action="openDialog"
+					class="group block grid place-content-center bg-slate-700 rounded-lg min-h-[400px] min-w-[400px] md:min-w-0 shadow-[inset_0_0_5px_30px_hsl(0deg_0%_10%_/30%),_inset_0_0_8px_60px_hsl(0deg_0%_10%_/30%),_inset_0_0_10px_90px_hsl(0deg_0%_10%_/30%)] duration-200 ease-in-out hover:shadow-[inset_0px_0px_5px_60px_hsl(0deg_0%_10%_/30%),_inset_0_0_8px_90px_hsl(0deg_0%_10%_/30%),_inset_0_0_10px_120px_hsl(0deg_0%_10%_/30%)] cursor-pointer"
+				>
+					<div class="group-hover:scale-[70%] duration-200 ease-in-out w-48 text-white">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+						>
+							<path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+		<script src="./script.js"></script>
+	</body>
+</html>
