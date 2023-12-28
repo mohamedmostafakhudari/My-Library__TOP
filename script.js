@@ -182,7 +182,7 @@ function createCard({ id, title, author, pages, read }, index) {
 	);
 	const cardTitleElem = createDomElement("h2", "text-4xl text-center py-16 font-bold relative");
 	const cardTitleUpperDecorativeLineElem = createDomElement("span", "absolute h-2 top-10 left-0 w-full bg-sky-600/20");
-	const cardTitleTextElem = createDomElement("span", "relative bg-sky-600/20 p-4 rounded-lg drop-shadow-lg", title);
+	const cardTitleTextElem = createDomElement("span", "relative p-4 rounded-lg", title);
 	const cardTitleLowerDecorativeLineElem = createDomElement("span", "absolute h-2 bottom-10 left-0 w-full bg-sky-600/20");
 	cardTitleElem.append(cardTitleUpperDecorativeLineElem, cardTitleTextElem, cardTitleLowerDecorativeLineElem);
 
