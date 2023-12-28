@@ -188,19 +188,19 @@ function createCard({ id, title, author, pages, read }, index) {
 
 	const cardDescElem = createDomElement("div", "pb-24 text-white space-y-4 px-12 text-xl");
 
-	const cardAuthorElem = createDomElement("p", "grid grid-cols-[1fr_90px]");
+	const cardAuthorElem = createDomElement("p", "grid grid-cols-2");
 	const cardAuthorLabelElem = createDomElement("span", "", "Author: ");
-	const cardAuthorValueElem = createDomElement("span", "justify-self-start", author);
+	const cardAuthorValueElem = createDomElement("span", "justify-self-start whitespace-nowrap", author);
 	cardAuthorElem.append(cardAuthorLabelElem, cardAuthorValueElem);
 
-	const cardPagesElem = createDomElement("p", "grid grid-cols-[1fr_90px]");
+	const cardPagesElem = createDomElement("p", "grid grid-cols-2");
 	const cardPagesLabelElem = createDomElement("span", "", "Pages: ");
-	const cardPagesValueElem = createDomElement("span", "justify-self-start", pages);
+	const cardPagesValueElem = createDomElement("span", "justify-self-start whitespace-nowrap", pages);
 	cardPagesElem.append(cardPagesLabelElem, cardPagesValueElem);
 
-	const cardReadElem = createDomElement("p", "grid grid-cols-[1fr_90px]");
+	const cardReadElem = createDomElement("p", "grid grid-cols-2");
 	const cardReadLabelElem = createDomElement("span", "", "Read: ");
-	const cardReadValueElem = createDomElement("span", "justify-self-start", read ? "Yes" : "No");
+	const cardReadValueElem = createDomElement("span", "justify-self-start whitespace-nowrap", read ? "Yes" : "No");
 	cardReadElem.append(cardReadLabelElem, cardReadValueElem);
 
 	cardDescElem.append(cardAuthorElem, cardPagesElem, cardReadElem);
